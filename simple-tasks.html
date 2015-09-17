@@ -1,0 +1,39 @@
+<head>
+  <title>simple-tasks</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Tasktastic!</h1>
+      <label class="hide-completed" for="check_id">
+        <input type="checkbox" name="check_id" id="check_id" checked="{{hideCompleted}}" />
+        Hide Completed Tasks
+      </label>
+      {{> loginButtons}}
+
+      {{#if currentUser}}
+      <h4>Welcome, {{currentUser.username}}! You have {{incompleteCount}} incomplete tasks.</h4>
+      <form class="new-task">
+        <input type="text" name="text" placeholder="Type to add new tasks" />
+      </form>
+      {{/if}}
+    </header>
+
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+
+<template name="task">
+  <li class="{{#if checked}}checked{{/if}}">
+    <button class="delete">&times;</button>
+
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+  </li>
+</template>
